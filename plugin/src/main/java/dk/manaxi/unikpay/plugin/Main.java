@@ -45,8 +45,7 @@ public final class Main extends JavaPlugin {
         log.sendMessage(ColorUtils.getColored("", "  &2Hooking into Commands"));
         CommandManager.initialise(this);
         //hooks
-        log.sendMessage(ColorUtils.getColored("", "  &2Hooking into integrations"));
-        initialiseHooks();
+        log.sendMessage(ColorUtils.getColored("", "  &2(Disabled by yzhy) Hooking into integrations"));
         IoSocket.connectSocket();
         Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
 
@@ -63,7 +62,7 @@ public final class Main extends JavaPlugin {
             public void run() {
                 Payments.fetchPayments();
             }
-        }).runTaskTimer(Main.getInstance(), 20L, 600L);
+        }).runTaskTimerAsynchronously(Main.getInstance(), 20L, 600L);
     }
 
     @Override
@@ -112,18 +111,8 @@ public final class Main extends JavaPlugin {
         return super.getFile();
     }
 
-    private void initialiseHooks() {
-        IHook[] hooks = {
-                new SkriptHook()
-        };
-        for (IHook hook : hooks) {
-            HOOKS.put(hook.getEnum(), hook.init(this));
-        }
-    }
-
     public static boolean isHookInitialised(Hook paramHook) {
         return HOOKS.getOrDefault(paramHook, Boolean.FALSE);
     }
-
 
 }
