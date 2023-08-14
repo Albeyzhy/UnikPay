@@ -47,8 +47,6 @@ public final class Main extends JavaPlugin {
         //hooks
         log.sendMessage(ColorUtils.getColored("", "  &2(Disabled by yzhy) Hooking into integrations"));
         IoSocket.connectSocket();
-        Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
-
         log.sendMessage(ColorUtils.getColored("", " &2Hooking into console"));
         Logger logger = (Logger) LogManager.getRootLogger();
         logger.addAppender(new Console());
